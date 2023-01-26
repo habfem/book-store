@@ -3,11 +3,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-//app.use(express.static(__dirname+'/client'));
+app.use(express.static(__dirname + '/client'));
 app.use(bodyParser.json());
 
-Genre =require('./models/genre');
-Book =require('./models/book');
+Genre = require('./models/genre');
+Book = require('./models/book');
 
 // Connect to Mongoose
 mongoose.connect('mongodb://localhost/bookstore');
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 // api for genres
 app.get('/api/genres', (req, res) => {
 	Genre.getGenres((err, genres) => {
-		if(err){
+		if (err) {
 			throw err;
 		}
 		res.json(genres);
@@ -31,9 +31,9 @@ app.get('/api/genres', (req, res) => {
 // Add genres
 // POSTMAN, ARC; chrome add-in can be used to make post request
 app.post('/api/genres', (req, res) => {
-  const genre = req.body;
+	const genre = req.body;
 	Genre.addGenres(genre, (err, genre) => {
-		if(err){
+		if (err) {
 			throw err;
 		}
 		res.json(genre);
@@ -45,7 +45,7 @@ app.put('/api/genres/:_id', (req, res) => {
 	const id = req.params._id;
 	const genre = req.body;
 	Genre.updateGenre(id, genre, {}, (err, genre) => {
-		if(err){
+		if (err) {
 			throw err;
 		}
 		res.json(genre);
@@ -56,7 +56,7 @@ app.put('/api/genres/:_id', (req, res) => {
 app.delete('/api/genres/:_id', (req, res) => {
 	var id = req.params._id;
 	Genre.removeGenre(id, (err, genre) => {
-		if(err){
+		if (err) {
 			throw err;
 		}
 		res.json(genre);
@@ -67,7 +67,7 @@ app.delete('/api/genres/:_id', (req, res) => {
 // api for books
 app.get('/api/books', (req, res) => {
 	Book.getBooks((err, books) => {
-		if(err){
+		if (err) {
 			throw err;
 		}
 		res.json(books);
@@ -77,7 +77,7 @@ app.get('/api/books', (req, res) => {
 // api for each book by id
 app.get('/api/books/:_id', (req, res) => {
 	Book.getBookById(req.params._id, (err, book) => {
-		if(err){
+		if (err) {
 			throw err;
 		}
 		res.json(book);
@@ -86,9 +86,9 @@ app.get('/api/books/:_id', (req, res) => {
 
 // add book
 app.post('/api/books', (req, res) => {
-  const book = req.body;
+	const book = req.body;
 	Book.addBook(book, (err, book) => {
-		if(err){
+		if (err) {
 			throw err;
 		}
 		res.json(book);
@@ -100,7 +100,7 @@ app.put('/api/books/:_id', (req, res) => {
 	const id = req.params._id;
 	const book = req.body;
 	Book.updateBook(id, book, {}, (err, book) => {
-		if(err){
+		if (err) {
 			throw err;
 		}
 		res.json(book);
@@ -110,7 +110,7 @@ app.put('/api/books/:_id', (req, res) => {
 app.delete('/api/books/:_id', (req, res) => {
 	var id = req.params._id;
 	Book.removeBook(id, (err, book) => {
-		if(err){
+		if (err) {
 			throw err;
 		}
 		res.json(book);
